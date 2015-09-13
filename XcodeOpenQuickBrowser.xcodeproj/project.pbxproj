@@ -6,9 +6,15 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D6A27E6E1BA5AEA90078BD02 /* XcodeOpenQuickBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A27E6D1BA5AEA90078BD02 /* XcodeOpenQuickBrowser.m */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
-		D6A27E5E1BA5ACB10078BD02 /* XcodeOpenQuickBrowser.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XcodeOpenQuickBrowser.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6A27E5E1BA5ACB10078BD02 /* XcodeOpenQuickBrowser.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XcodeOpenQuickBrowser.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6A27E621BA5ACB20078BD02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6A27E6C1BA5AEA90078BD02 /* XcodeOpenQuickBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeOpenQuickBrowser.h; sourceTree = "<group>"; };
+		D6A27E6D1BA5AEA90078BD02 /* XcodeOpenQuickBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XcodeOpenQuickBrowser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,7 +39,7 @@
 		D6A27E5F1BA5ACB10078BD02 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D6A27E5E1BA5ACB10078BD02 /* XcodeOpenQuickBrowser.bundle */,
+				D6A27E5E1BA5ACB10078BD02 /* XcodeOpenQuickBrowser.xcplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -41,6 +47,7 @@
 		D6A27E601BA5ACB10078BD02 /* XcodeOpenQuickBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				D6A27E6B1BA5AE8C0078BD02 /* Class */,
 				D6A27E611BA5ACB10078BD02 /* Supporting Files */,
 			);
 			path = XcodeOpenQuickBrowser;
@@ -52,6 +59,15 @@
 				D6A27E621BA5ACB20078BD02 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D6A27E6B1BA5AE8C0078BD02 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				D6A27E6C1BA5AEA90078BD02 /* XcodeOpenQuickBrowser.h */,
+				D6A27E6D1BA5AEA90078BD02 /* XcodeOpenQuickBrowser.m */,
+			);
+			name = Class;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,7 +87,7 @@
 			);
 			name = XcodeOpenQuickBrowser;
 			productName = XcodeOpenQuickBrowser;
-			productReference = D6A27E5E1BA5ACB10078BD02 /* XcodeOpenQuickBrowser.bundle */;
+			productReference = D6A27E5E1BA5ACB10078BD02 /* XcodeOpenQuickBrowser.xcplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -120,6 +136,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6A27E6E1BA5AEA90078BD02 /* XcodeOpenQuickBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,11 +224,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "$(HOME)";
 				INFOPLIST_FILE = XcodeOpenQuickBrowser/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
+				SKIP_INSTALL = NO;
+				WRAPPER_EXTENSION = xcplugin;
 			};
 			name = Debug;
 		};
@@ -219,11 +238,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "$(HOME)";
 				INFOPLIST_FILE = XcodeOpenQuickBrowser/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
+				SKIP_INSTALL = NO;
+				WRAPPER_EXTENSION = xcplugin;
 			};
 			name = Release;
 		};
@@ -246,6 +267,7 @@
 				D6A27E671BA5ACB20078BD02 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
