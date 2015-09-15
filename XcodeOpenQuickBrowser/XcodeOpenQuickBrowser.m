@@ -8,8 +8,15 @@
 
 #import <AppKit/AppKit.h>
 #import "XcodeOpenQuickBrowser.h"
+#import "XcodeHelper.h"
+#import "NSTextView+HM_Extends.h"
 
-#define NSLog(format, ...) NSLog(@"%20s%5d: " format, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define NSLog(format, ...) NSLog(@"XOQB %20s%5d: " format, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
+// メニューのショートカットキー
+// 必要に応じて変更してください.
+// CTRL + DEFAULT_KEY
+#define DEFAULT_KEY (@";")
 
 @implementation XcodeOpenQuickBrowser
 
@@ -43,6 +50,7 @@ static XcodeOpenQuickBrowser* _sharedInstance = nil;
 }
 
 -(void)applicationDidFinishLaunching:(NSNotification*)noti {
+    NSLog(@"@@@@@");
     [self initMenu];
 }
 
@@ -51,6 +59,34 @@ static XcodeOpenQuickBrowser* _sharedInstance = nil;
 #pragma mark menu
 
 -(void)initMenu {
+    [self createMenuItemWithName:@"OpenBrowser" action:@selector(clickMenu:) parentMenuName:@"Edit"];
+}
+
+-(NSMenuItem*)createMenuItemWithName:(NSString*)name action:(SEL)action parentMenuName:(NSString*)parent {
+    NSMenu* mainMenu = [NSApp mainMenu];
+    
+    NSMenuItem* parentItem = [mainMenu itemWithTitle:parent];
+    NSLog(@"parentItem=%@", parentItem);
+    NSMenuItem* childItem = [[NSMenuItem alloc] initWithTitle:name action:action keyEquivalent:DEFAULT_KEY];
+    [childItem setKeyEquivalentModifierMask:NSControlKeyMask];
+    [childItem setTarget:self];
+    [[parentItem submenu] addItem:childItem];
+    return childItem;
+}
+
+-(void)clickMenu:(id)sender {
+    NSTextView* textView = [XcodeHelper currentSourceCodeView];
+    NSLog(@"current word=%@", [textView ex_currentWord]);
+   
+    // As recommended for OS X >= 10.6.
+    NSError* error = nil;
+    if ([[NSWorkspace sharedWorkspace] respondsToSelector:@selector(launchApplicationAtURL:options:configuration:error:)]) {
+        NSDictionary* config = @{NSWorkspaceLaunchConfigurationArguments: @"https://www.google.co.jp/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=NSAPP+reference"};
+        [[NSWorkspace sharedWorkspace] launchApplicationAtURL:[NSURL fileURLWithPath:@"/Applications/Google Chrome.app" isDirectory:NO] options:NSWorkspaceLaunchDefault configuration:config  error:&error];
+    }
+    
+    NSLog(@"error=%@", error);
+
     
 }
 

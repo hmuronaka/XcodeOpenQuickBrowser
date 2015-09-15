@@ -7,10 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D6883B451BA6D31D002AAD62 /* XcodeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D6883B441BA6D31D002AAD62 /* XcodeHelper.m */; settings = {ASSET_TAGS = (); }; };
+		D6883B491BA6D32E002AAD62 /* NSTextView+HM_Extends.m in Sources */ = {isa = PBXBuildFile; fileRef = D6883B481BA6D32E002AAD62 /* NSTextView+HM_Extends.m */; settings = {ASSET_TAGS = (); }; };
+		D6883B4C1BA6D356002AAD62 /* NSString+HM_Extends.m in Sources */ = {isa = PBXBuildFile; fileRef = D6883B4B1BA6D356002AAD62 /* NSString+HM_Extends.m */; settings = {ASSET_TAGS = (); }; };
 		D6A27E6E1BA5AEA90078BD02 /* XcodeOpenQuickBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A27E6D1BA5AEA90078BD02 /* XcodeOpenQuickBrowser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D6883B431BA6D31D002AAD62 /* XcodeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeHelper.h; sourceTree = "<group>"; };
+		D6883B441BA6D31D002AAD62 /* XcodeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XcodeHelper.m; sourceTree = "<group>"; };
+		D6883B471BA6D32E002AAD62 /* NSTextView+HM_Extends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextView+HM_Extends.h"; sourceTree = "<group>"; };
+		D6883B481BA6D32E002AAD62 /* NSTextView+HM_Extends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextView+HM_Extends.m"; sourceTree = "<group>"; };
+		D6883B4A1BA6D356002AAD62 /* NSString+HM_Extends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HM_Extends.h"; sourceTree = "<group>"; };
+		D6883B4B1BA6D356002AAD62 /* NSString+HM_Extends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HM_Extends.m"; sourceTree = "<group>"; };
+		D6883B4D1BA6D3BC002AAD62 /* XcodeComponents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XcodeComponents.h; sourceTree = "<group>"; };
 		D6A27E5E1BA5ACB10078BD02 /* XcodeOpenQuickBrowser.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XcodeOpenQuickBrowser.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6A27E621BA5ACB20078BD02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6A27E6C1BA5AEA90078BD02 /* XcodeOpenQuickBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeOpenQuickBrowser.h; sourceTree = "<group>"; };
@@ -28,6 +38,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D6883B421BA6D315002AAD62 /* Xcode */ = {
+			isa = PBXGroup;
+			children = (
+				D6883B4D1BA6D3BC002AAD62 /* XcodeComponents.h */,
+				D6883B431BA6D31D002AAD62 /* XcodeHelper.h */,
+				D6883B441BA6D31D002AAD62 /* XcodeHelper.m */,
+			);
+			name = Xcode;
+			sourceTree = "<group>";
+		};
+		D6883B461BA6D320002AAD62 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				D6883B4A1BA6D356002AAD62 /* NSString+HM_Extends.h */,
+				D6883B4B1BA6D356002AAD62 /* NSString+HM_Extends.m */,
+				D6883B471BA6D32E002AAD62 /* NSTextView+HM_Extends.h */,
+				D6883B481BA6D32E002AAD62 /* NSTextView+HM_Extends.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
 		D6A27E551BA5ACB10078BD02 = {
 			isa = PBXGroup;
 			children = (
@@ -47,6 +78,8 @@
 		D6A27E601BA5ACB10078BD02 /* XcodeOpenQuickBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				D6883B461BA6D320002AAD62 /* Category */,
+				D6883B421BA6D315002AAD62 /* Xcode */,
 				D6A27E6B1BA5AE8C0078BD02 /* Class */,
 				D6A27E611BA5ACB10078BD02 /* Supporting Files */,
 			);
@@ -137,6 +170,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6A27E6E1BA5AEA90078BD02 /* XcodeOpenQuickBrowser.m in Sources */,
+				D6883B451BA6D31D002AAD62 /* XcodeHelper.m in Sources */,
+				D6883B4C1BA6D356002AAD62 /* NSString+HM_Extends.m in Sources */,
+				D6883B491BA6D32E002AAD62 /* NSTextView+HM_Extends.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
