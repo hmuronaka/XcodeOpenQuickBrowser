@@ -79,14 +79,8 @@ static XcodeOpenQuickBrowser* _sharedInstance = nil;
     NSLog(@"current word=%@", [textView ex_currentWord]);
    
     // As recommended for OS X >= 10.6.
-    NSError* error = nil;
-    if ([[NSWorkspace sharedWorkspace] respondsToSelector:@selector(launchApplicationAtURL:options:configuration:error:)]) {
-        NSDictionary* config = @{NSWorkspaceLaunchConfigurationArguments: @"https://www.google.co.jp/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=NSAPP+reference"};
-        [[NSWorkspace sharedWorkspace] launchApplicationAtURL:[NSURL fileURLWithPath:@"/Applications/Google Chrome.app" isDirectory:NO] options:NSWorkspaceLaunchDefault configuration:config  error:&error];
-    }
-    
-    NSLog(@"error=%@", error);
-
+    NSString* url = [NSString stringWithFormat:@"https://www.google.co.jp/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=%@+reference", [textView ex_currentWord]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
     
 }
 
