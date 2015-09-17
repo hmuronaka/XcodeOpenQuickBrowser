@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D6843EFC1BA8F1000084469A /* XcodeOpenQuickBrowserMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6843EFB1BA8F1000084469A /* XcodeOpenQuickBrowserMenuItem.m */; settings = {ASSET_TAGS = (); }; };
+		D6843EFF1BA8F57D0084469A /* XcodeOpenQuickBrowserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D6843EFE1BA8F57D0084469A /* XcodeOpenQuickBrowserConfig.m */; settings = {ASSET_TAGS = (); }; };
 		D6883B451BA6D31D002AAD62 /* XcodeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D6883B441BA6D31D002AAD62 /* XcodeHelper.m */; settings = {ASSET_TAGS = (); }; };
 		D6883B491BA6D32E002AAD62 /* NSTextView+HM_Extends.m in Sources */ = {isa = PBXBuildFile; fileRef = D6883B481BA6D32E002AAD62 /* NSTextView+HM_Extends.m */; settings = {ASSET_TAGS = (); }; };
 		D6883B4C1BA6D356002AAD62 /* NSString+HM_Extends.m in Sources */ = {isa = PBXBuildFile; fileRef = D6883B4B1BA6D356002AAD62 /* NSString+HM_Extends.m */; settings = {ASSET_TAGS = (); }; };
@@ -14,6 +16,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D6843EFA1BA8F1000084469A /* XcodeOpenQuickBrowserMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeOpenQuickBrowserMenuItem.h; sourceTree = "<group>"; };
+		D6843EFB1BA8F1000084469A /* XcodeOpenQuickBrowserMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XcodeOpenQuickBrowserMenuItem.m; sourceTree = "<group>"; };
+		D6843EFD1BA8F57D0084469A /* XcodeOpenQuickBrowserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeOpenQuickBrowserConfig.h; sourceTree = "<group>"; };
+		D6843EFE1BA8F57D0084469A /* XcodeOpenQuickBrowserConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XcodeOpenQuickBrowserConfig.m; sourceTree = "<group>"; };
 		D6883B431BA6D31D002AAD62 /* XcodeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeHelper.h; sourceTree = "<group>"; };
 		D6883B441BA6D31D002AAD62 /* XcodeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XcodeHelper.m; sourceTree = "<group>"; };
 		D6883B471BA6D32E002AAD62 /* NSTextView+HM_Extends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextView+HM_Extends.h"; sourceTree = "<group>"; };
@@ -99,6 +105,10 @@
 			children = (
 				D6A27E6C1BA5AEA90078BD02 /* XcodeOpenQuickBrowser.h */,
 				D6A27E6D1BA5AEA90078BD02 /* XcodeOpenQuickBrowser.m */,
+				D6843EFA1BA8F1000084469A /* XcodeOpenQuickBrowserMenuItem.h */,
+				D6843EFB1BA8F1000084469A /* XcodeOpenQuickBrowserMenuItem.m */,
+				D6843EFD1BA8F57D0084469A /* XcodeOpenQuickBrowserConfig.h */,
+				D6843EFE1BA8F57D0084469A /* XcodeOpenQuickBrowserConfig.m */,
 			);
 			name = Class;
 			sourceTree = "<group>";
@@ -172,6 +182,8 @@
 				D6A27E6E1BA5AEA90078BD02 /* XcodeOpenQuickBrowser.m in Sources */,
 				D6883B451BA6D31D002AAD62 /* XcodeHelper.m in Sources */,
 				D6883B4C1BA6D356002AAD62 /* NSString+HM_Extends.m in Sources */,
+				D6843EFC1BA8F1000084469A /* XcodeOpenQuickBrowserMenuItem.m in Sources */,
+				D6843EFF1BA8F57D0084469A /* XcodeOpenQuickBrowserConfig.m in Sources */,
 				D6883B491BA6D32E002AAD62 /* NSTextView+HM_Extends.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

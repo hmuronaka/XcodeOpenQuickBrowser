@@ -111,4 +111,35 @@
     return [NSString stringWithString:str];
 }
 
+-(NSRange)ex_rangeOfIncludingCharacterSet:(NSCharacterSet*)charaSet position:(NSUInteger)position {
+    
+    if( [[charaSet invertedSet] characterIsMember:[self characterAtIndex:position]] ) {
+        return NSMakeRange(NSNotFound, 0);
+    }
+    
+    // 前方探索
+    NSInteger begin = position;
+    while( begin - 1 >= 0 ) {
+        if( ![charaSet characterIsMember:[self characterAtIndex:begin - 1]] ) {
+            break;
+        }
+        --begin;
+    }
+    
+    NSInteger end = position + 1;
+    while( end < self.length ) {
+        if( ![charaSet characterIsMember:[self characterAtIndex:end]] ) {
+            break;
+        }
+        ++end;
+    }
+    
+    NSRange range = NSMakeRange(begin, end - begin);
+    return range;
+}
+
+-(NSRange)ex_range {
+    return NSMakeRange(0, self.length);
+}
+
 @end

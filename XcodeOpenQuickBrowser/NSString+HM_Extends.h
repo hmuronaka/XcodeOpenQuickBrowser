@@ -13,7 +13,7 @@
 @interface NSString (HM_Extends)
 
 -(NSRange)ex_findWithPattern:(NSString*)pattern;
-
+-(NSRange)ex_range;
 -(BOOL)ex_isStartChars:(NSString*)characterSet;
 -(BOOL)ex_hasCharas:(NSString*)characterSet withOption:(NSStringCompareOptions)options;
 -(NSString*)ex_replaceFrom:(NSString*)fromStr to:(NSString*)toStr;
@@ -22,5 +22,6 @@
 -(NSRange)ex_findWithPattern:(NSString*)pattern fromRange:(NSRange)range andIsBackwward:(BOOL)isBackwards;
 -(NSString*)ex_getLineFromPos:(NSInteger)pos;
 -(NSString*)ex_escapeMetaCharacters:(NSCharacterSet*)charaSet;
+-(NSRange)ex_rangeOfIncludingCharacterSet:(NSCharacterSet*)charaSet position:(NSUInteger)position;
 
 @end

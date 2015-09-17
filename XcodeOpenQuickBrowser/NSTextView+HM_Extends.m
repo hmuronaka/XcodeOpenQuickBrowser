@@ -30,30 +30,38 @@
     NSMutableCharacterSet* alphaNumUnderScoreSet = [NSMutableCharacterSet alphanumericCharacterSet];
     [alphaNumUnderScoreSet formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"_"]];
     
-    if( [[alphaNumUnderScoreSet invertedSet] characterIsMember:[string characterAtIndex:pos]] ) {
+    NSRange range = [string ex_rangeOfIncludingCharacterSet:alphaNumUnderScoreSet position:pos];
+    if( range.location == NSNotFound || range.length == 0 ) {
+        return @"";
+    }
+    return [string substringWithRange:range];
+}
+
+-(NSString*)ex_currentIssue  {
+    NSString* string = self.textStorage.string;
+    
+    NSInteger pos = [self ex_cursolPosition];
+    
+    NSMutableCharacterSet* charaSet = [NSMutableCharacterSet alphanumericCharacterSet];
+    [charaSet formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"_"]];
+    [charaSet formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
+    [charaSet formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"#"]];
+    
+    NSRange range = [string ex_rangeOfIncludingCharacterSet:charaSet position:pos];
+    
+    if( range.location == NSNotFound || range.length == 0 ) {
         return @"";
     }
     
-    
-    // 前方探索
-    NSInteger begin = pos;
-    while( begin - 1 >= 0 ) {
-        if( ![alphaNumUnderScoreSet characterIsMember:[string characterAtIndex:begin - 1]] ) {
-            break;
-        }
-        --begin;
+    NSString* word = [string substringWithRange:range];
+    if( [word ex_findWithPattern:@"PS-[\\d]+"].location == NSNotFound ) {
+        return @"";
     }
-    
-    NSInteger end = pos + 1;
-    while( end < string.length ) {
-        if( ![alphaNumUnderScoreSet characterIsMember:[string characterAtIndex:end]] ) {
-            break;
-        }
-        ++end;
-    }
-    
-    NSRange range = NSMakeRange(begin, end - begin);
-    return [string substringWithRange:range];
+    return word;
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark private
 
 @end

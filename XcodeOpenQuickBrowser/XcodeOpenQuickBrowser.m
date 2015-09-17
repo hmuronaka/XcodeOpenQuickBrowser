@@ -10,6 +10,8 @@
 #import "XcodeOpenQuickBrowser.h"
 #import "XcodeHelper.h"
 #import "NSTextView+HM_Extends.h"
+#import "XcodeOpenQuickBrowserConfig.h"
+#import "XcodeOpenQuickBrowserMenuItem.h"
 
 #define NSLog(format, ...) NSLog(@"XOQB %20s%5d: " format, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 
@@ -18,9 +20,19 @@
 // CTRL + DEFAULT_KEY
 #define DEFAULT_KEY (@";")
 
-@implementation XcodeOpenQuickBrowser
-
 static XcodeOpenQuickBrowser* _sharedInstance = nil;
+static NSString* configFilename = @".xopenbrowser.json";
+
+
+@interface XcodeOpenQuickBrowser()
+
+@property(nonatomic, strong) XcodeOpenQuickBrowserConfig* config;
+
+@end
+
+
+
+@implementation XcodeOpenQuickBrowser
 
 +(void)pluginDidLoad:(NSBundle*)plugin {
     [self sharedInstance];
@@ -45,6 +57,8 @@ static XcodeOpenQuickBrowser* _sharedInstance = nil;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationDidFinishLaunching:)
                                                      name:NSApplicationDidFinishLaunchingNotification object:nil];
+        
+        self.config = [XcodeOpenQuickBrowserConfig loadWithFilename:configFilename];
     }
     return self;
 }
@@ -59,15 +73,21 @@ static XcodeOpenQuickBrowser* _sharedInstance = nil;
 #pragma mark menu
 
 -(void)initMenu {
-    [self createMenuItemWithName:@"OpenBrowser" action:@selector(clickMenu:) parentMenuName:@"Edit"];
+    
+    [_config.menuItems enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        XcodeOpenQuickBrowserMenuItem* menuItem = obj;
+        [self createMenuItem:menuItem parent:@"Edit" tag:(idx + 1)];
+    }];
+    
 }
 
--(NSMenuItem*)createMenuItemWithName:(NSString*)name action:(SEL)action parentMenuName:(NSString*)parent {
+-(NSMenuItem*)createMenuItem:(XcodeOpenQuickBrowserMenuItem*)menuItem parent:(NSString*)parent tag:(NSUInteger)tag {
     NSMenu* mainMenu = [NSApp mainMenu];
     
     NSMenuItem* parentItem = [mainMenu itemWithTitle:parent];
     NSLog(@"parentItem=%@", parentItem);
-    NSMenuItem* childItem = [[NSMenuItem alloc] initWithTitle:name action:action keyEquivalent:DEFAULT_KEY];
+    NSMenuItem* childItem = [[NSMenuItem alloc] initWithTitle:menuItem.menuTitle action:@selector(clickMenu:) keyEquivalent:menuItem.shortcutKey];
+    childItem.tag = tag;
     [childItem setKeyEquivalentModifierMask:NSControlKeyMask];
     [childItem setTarget:self];
     [[parentItem submenu] addItem:childItem];
@@ -75,12 +95,27 @@ static XcodeOpenQuickBrowser* _sharedInstance = nil;
 }
 
 -(void)clickMenu:(id)sender {
+    
+    NSMenuItem* menuItem = sender;
     NSTextView* textView = [XcodeHelper currentSourceCodeView];
-    NSLog(@"current word=%@", [textView ex_currentWord]);
-   
+    
+    
+    NSString* urlStr = nil;
+    NSString* issue = [textView ex_currentIssue];
+    if( [issue isEqualToString:@""] ) {
+        NSString* currentWord = [textView ex_currentWord];
+        NSLog(@"current word=%@", currentWord);
+        
+        XcodeOpenQuickBrowserMenuItem* xcodeOpenQuickBrowserMenuItem = [self.config menuItemAtIndex:menuItem.tag - 1];
+        NSString* urlPattern = xcodeOpenQuickBrowserMenuItem.urlPattern;
+        urlStr = [NSString stringWithFormat:urlPattern, [textView ex_currentWord]];
+    } else {
+        // github, bitbucket issue.
+        urlStr = [NSString stringWithFormat:@"https://your.domain/%@", issue];
+    }
+    
     // As recommended for OS X >= 10.6.
-    NSString* url = [NSString stringWithFormat:@"https://www.google.co.jp/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=%@+reference", [textView ex_currentWord]];
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:urlStr]];
     
 }
 
