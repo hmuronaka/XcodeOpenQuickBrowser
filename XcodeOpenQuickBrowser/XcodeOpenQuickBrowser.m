@@ -78,7 +78,6 @@ static NSString* configFilename = @".xopenbrowser.json";
         XcodeOpenQuickBrowserMenuItem* menuItem = obj;
         [self createMenuItem:menuItem parent:@"Edit" tag:(idx + 1)];
     }];
-    
 }
 
 -(NSMenuItem*)createMenuItem:(XcodeOpenQuickBrowserMenuItem*)menuItem parent:(NSString*)parent tag:(NSUInteger)tag {
@@ -98,20 +97,22 @@ static NSString* configFilename = @".xopenbrowser.json";
     
     NSMenuItem* menuItem = sender;
     NSTextView* textView = [XcodeHelper currentSourceCodeView];
-    
+    XcodeOpenQuickBrowserMenuItem* xcodeOpenQuickBrowserMenuItem = [self.config menuItemAtIndex:menuItem.tag - 1];
     
     NSString* urlStr = nil;
-    NSString* issue = [textView ex_currentIssue];
-    if( [issue isEqualToString:@""] ) {
+    if( xcodeOpenQuickBrowserMenuItem.useIssue ) {
+        NSString* issue = [textView ex_currentIssue:xcodeOpenQuickBrowserMenuItem.issuePattern];
+        if( ![issue isEqualTo:@""]) {
+            urlStr = [NSString stringWithFormat:xcodeOpenQuickBrowserMenuItem.issueURLPattern, issue];
+        }
+    }
+    
+    if( !urlStr ) {
         NSString* currentWord = [textView ex_currentWord];
         NSLog(@"current word=%@", currentWord);
         
-        XcodeOpenQuickBrowserMenuItem* xcodeOpenQuickBrowserMenuItem = [self.config menuItemAtIndex:menuItem.tag - 1];
         NSString* urlPattern = xcodeOpenQuickBrowserMenuItem.urlPattern;
         urlStr = [NSString stringWithFormat:urlPattern, [textView ex_currentWord]];
-    } else {
-        // github, bitbucket issue.
-        urlStr = [NSString stringWithFormat:@"https://your.domain/%@", issue];
     }
     
     // As recommended for OS X >= 10.6.

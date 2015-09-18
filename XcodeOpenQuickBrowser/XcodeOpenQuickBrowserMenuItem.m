@@ -8,9 +8,14 @@
 
 #import "XcodeOpenQuickBrowserMenuItem.h"
 
+#define NSLog(format, ...) NSLog(@"%20s%5d: " format, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
 NSString* kXcodeOpenQuickBrowserMenuItemTitle = @"kXcodeOpenQuickBrowserMenuItemTitle";
 NSString* kXcodeOpenQuickBrowserMenuItemURLPattern = @"kXcodeOpenQuickBrowserMenuItemURLPattern";
 NSString* kXcodeOpenQuickBrowserMenuItemShortCutKey = @"kXcodeOpenQuickBrowserMenuItemShortCutKey";
+NSString* kXcodeOpenQuickBrowserMenuItemUseIssue = @"kXcodeOpenQuickBrowserMenuItemUseIssue";
+NSString* kXcodeOpenQuickBrowserMenuItemIssuePattern = @"kXcodeOpenQuickBrowserMenuItemIssuePattern";
+NSString* kXcodeOpenQuickBrowserMenuItemIssueURLPattern = @"kXcodeOpenQuickBrowserMenuItemIssueURLPattern";
 
 @implementation XcodeOpenQuickBrowserMenuItem
 
@@ -31,6 +36,13 @@ NSString* kXcodeOpenQuickBrowserMenuItemShortCutKey = @"kXcodeOpenQuickBrowserMe
         _menuTitle = dictionary[kXcodeOpenQuickBrowserMenuItemTitle];
         _urlPattern = dictionary[kXcodeOpenQuickBrowserMenuItemURLPattern];
         _shortcutKey = dictionary[kXcodeOpenQuickBrowserMenuItemShortCutKey];
+        if( dictionary[kXcodeOpenQuickBrowserMenuItemUseIssue] ) {
+            _useIssue = [dictionary[kXcodeOpenQuickBrowserMenuItemUseIssue] boolValue];
+            _issuePattern = dictionary[kXcodeOpenQuickBrowserMenuItemIssuePattern];
+            _issueURLPattern = dictionary[kXcodeOpenQuickBrowserMenuItemIssueURLPattern];
+        } else {
+            _useIssue = NO;
+        }
     }
     return self;
 }

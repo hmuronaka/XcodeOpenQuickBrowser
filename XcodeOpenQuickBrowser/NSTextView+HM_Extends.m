@@ -37,24 +37,20 @@
     return [string substringWithRange:range];
 }
 
--(NSString*)ex_currentIssue  {
+-(NSString*)ex_currentIssue:(NSString*)issuePattern  {
     NSString* string = self.textStorage.string;
     
     NSInteger pos = [self ex_cursolPosition];
     
-    NSMutableCharacterSet* charaSet = [NSMutableCharacterSet alphanumericCharacterSet];
-    [charaSet formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"_"]];
-    [charaSet formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]];
-    [charaSet formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"#"]];
-    
-    NSRange range = [string ex_rangeOfIncludingCharacterSet:charaSet position:pos];
+    NSRange range = [string ex_rangeOfIncludingCharacterSet:[[NSCharacterSet whitespaceAndNewlineCharacterSet] invertedSet] position:pos];
     
     if( range.location == NSNotFound || range.length == 0 ) {
         return @"";
     }
     
     NSString* word = [string substringWithRange:range];
-    if( [word ex_findWithPattern:@"PS-[\\d]+"].location == NSNotFound ) {
+//    if( [word ex_findWithPattern:@"PS-[\\d]+"].location == NSNotFound ) {
+    if( [word ex_findWithPattern:issuePattern].location == NSNotFound ) {
         return @"";
     }
     return word;
